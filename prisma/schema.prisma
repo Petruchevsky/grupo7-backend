@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model Image {
+  id             Int           @id @default(autoincrement())
+  url            String
+  publicId       String
+  fileType       String?
+  userId         Int?
+  User           User?         @relation(fields: [userId], references: [id])
+  sliderId       Int?
+  Slider         Slider?       @relation(fields: [sliderId], references: [id])
+  blogId         Int?
+  Blog           Blog?         @relation(fields: [blogId], references: [id])
+  nosotrosId     Int?
+  Nosotros       Nosotros?     @relation(fields: [nosotrosId], references: [id])
+  proximamenteId Int?
+  Proximamente   Proximamente? @relation(fields: [proximamenteId], references: [id])
+  productoId     Int?
+  Producto       Producto?     @relation(fields: [productoId], references: [id])
+}
+
+model User {
+  id              Int       @id @default(autoincrement())
+  imageId         Int?
+  image           Image[]
+  name            String?
+  email           String    @unique
+  emailVerified   Boolean?  @default(false)
+  password        String?
+  isAdmin         Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+
+model Slider {
+  id     Int     @id @default(autoincrement())
+  images Image[]
+}
+
+model Blog {
+  id          Int      @id @default(autoincrement())
+  title       String?
+  description String?
+  createdBy   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  slug        String?
+  images      Image[]
+}
+
+model Nosotros {
+  id          Int     @id @default(autoincrement())
+  description String?
+  images      Image[]
+}
+
+model Proximamente {
+  id          Int     @id @default(autoincrement())
+  title       String?
+  releaseDate String?
+  description String?
+  images      Image[]
+}
+
+model Producto {
+  id          Int      @id @default(autoincrement())
+  title       String?
+  price       Int?
+  stock       Boolean?
+  description String?
+  slug        String?
+  images      Image[]
+}
+
+model Faq {
+  id          Int      @id @default(autoincrement())
+  question    String?
+  answer      String?
+}
