@@ -12,6 +12,7 @@ export async function POST(request) {
 	const data = await request.json();
 	const { email, password } = data;
 	console.log(isSecure);
+	console.log(sameSiteConfig);
 
 	const foundUser = await prisma.user.findUnique({
 		where: {
