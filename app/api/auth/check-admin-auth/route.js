@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-import { redirect } from 'next/navigation' 
 
 export function GET(request) {
   const adminUserLogged = request.cookies.get('adminCookie')

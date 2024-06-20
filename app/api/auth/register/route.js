@@ -40,7 +40,7 @@ export async function POST(request) {
 			expiresIn: "1d",
 		});
 	
-		const verificationURL = `${process.env.NEXT_PUBLIC_NEXT_APIURL}/verificar-email/${token}`;
+		const verificationURL = `${process.env.NEXT_PUBLIC_FRONTURL}/verificar-email/${token}`;
 		const message = `
 			<h1>¡Bienvenido a Grupo 7!</h1>
 			<p>Para activar tu cuenta, haz click en el siguiente enlace:</p>
@@ -93,7 +93,7 @@ export async function POST(request) {
 		const token = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, {
 			expiresIn: "1d",
 		});
-		const verificationURL = `${process.env.NEXT_PUBLIC_NEXT_APIURL}/verificar-email/${token}`;
+		const verificationURL = `${process.env.NEXT_PUBLIC_FRONTURL}/verificar-email/${token}`;
 		const message = `
 			<h1>¡Bienvenido a Grupo 7!</h1>
 			<p>Para activar tu cuenta, haz click en el siguiente enlace:</p>

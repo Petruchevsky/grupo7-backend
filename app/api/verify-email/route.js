@@ -48,5 +48,5 @@ export async function POST(request) {
     });
   }
 
-  return NextResponse.json({ message: "Email verificado exitosamente!! Te estamos redirigiendo para que inicies sesión por primera vez :)" }, { status: 200 });
+  return NextResponse.json({ message: "Email verificado exitosamente!! Redirigiendo para iniciar sesión" }, { status: 200 });
 }

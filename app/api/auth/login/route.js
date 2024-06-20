@@ -5,10 +5,13 @@ import bcrypt from "bcrypt";
 import { cookies } from 'next/headers';
 
 const prisma = new PrismaClient();
+const isSecure = process.env.NODE_ENV === 'production';
+const sameSiteConfig = process.env.NODE_ENV === 'production' ? 'none' : 'lax'; 
 
 export async function POST(request) {
 	const data = await request.json();
 	const { email, password } = data;
+	console.log(isSecure);
 
 	const foundUser = await prisma.user.findUnique({
 		where: {
@@ -57,7 +60,8 @@ export async function POST(request) {
 			value: token,
 			httpOnly: true,
 			maxAge: 7*24*60*60,
-			sameSite: 'Strict'
+			sameSite: sameSiteConfig,
+			secure: isSecure,
 		})
 	
 		cookies().set({
@@ -65,10 +69,11 @@ export async function POST(request) {
 			value: true,
 			httpOnly: false,
 			maxAge: 7*24*60*60,
-			sameSite: 'Strict'
+			sameSite: sameSiteConfig,
+			secure: isSecure,
 		})
 	
-		return NextResponse.json({ message: "Login exitoso, te estamos redirigiendo a la página de inicio" }, { status: 200 });
+		return NextResponse.json({ message: "Login exitoso, redirigiendo a inicio" }, { status: 200 });
 	}
 
 	// SI EL USUARIO ES ADMINISTRADOR...
@@ -86,7 +91,8 @@ export async function POST(request) {
 			value: token,
 			httpOnly: true,
 			maxAge: 7*24*60*60,
-			sameSite: 'Strict'
+			sameSite: sameSiteConfig,
+			secure: isSecure,
 		})
 	
 		cookies().set({
@@ -94,7 +100,8 @@ export async function POST(request) {
 			value: true,
 			httpOnly: false,
 			maxAge: 7*24*60*60,
-			sameSite: 'Strict'
+			sameSite: sameSiteConfig,
+			secure: isSecure,
 		})
 
 		cookies().set({
@@ -102,10 +109,11 @@ export async function POST(request) {
 			value: true,
 			httpOnly: false,
 			maxAge: 7*24*60*60,
-			sameSite: 'Strict'
+			sameSite: sameSiteConfig,
+			secure: isSecure,
 		})
 	
-		return NextResponse.json({ message: "Login exitoso, bienvenido administrador, redirigiendo a página de inicio" }, { status: 200 });
+		return NextResponse.json({ message: "Login exitoso, bienvenido administrador, redirigiendo..." }, { status: 200 });
 	}
 
 }
