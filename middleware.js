@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
  
-const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001', 'https://moises-web-ecommerce.vercel.app', 'https://moises-web-ecommerce-api.vercel.app']
+const allowedOrigins = ['https://www.ecommerce.moises-web.cl', 'https://ecommerce.moises-web.cl', 'https://www.ecommerce.api.moises-web.cl', 'https://ecommerce.api.moises-web.cl', 'http://localhost:3000', 'http://localhost:3001', 'https://moises-web-ecommerce.vercel.app', 'https://moises-web-ecommerce-api.vercel.app']
  
 const corsOptions = {
   'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
