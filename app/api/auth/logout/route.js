@@ -7,19 +7,31 @@ const domain = process.env.NODE_ENV === 'production' ? '.moises-web.cl' : 'local
 
 export async function POST() {
 	cookies().delete("authCookie", {
-		secure: isSecure,
+		value: token,
+		httpOnly: true,
+		maxAge: 7*24*60*60,
 		sameSite: sameSiteConfig,
-		domain: domain,
+		secure: isSecure,
+		path: '/',
+		domain: domain
 	});
 	cookies().delete("loginCookie", {
-		secure: isSecure,
+		value: true,
+		httpOnly: false,
+		maxAge: 7*24*60*60,
 		sameSite: sameSiteConfig,
-		domain: domain,
+		secure: isSecure,
+		path: '/',
+		domain: domain 
 	});
 	cookies().delete("adminCookie", {
-		secure: isSecure,
+		value: true,
+		httpOnly: false,
+		maxAge: 7*24*60*60,
 		sameSite: sameSiteConfig,
-		domain: domain,
+		secure: isSecure,
+		path: '/',
+		domain: domain
 	});
 
 	return NextResponse.json(
