@@ -14,6 +14,7 @@ export async function POST(request) {
 	const { email, password } = data;
 	console.log(isSecure);
 	console.log(sameSiteConfig);
+	console.log(domain);
 
 	const foundUser = await prisma.user.findUnique({
 		where: {
@@ -64,6 +65,7 @@ export async function POST(request) {
 			maxAge: 7*24*60*60,
 			sameSite: sameSiteConfig,
 			secure: isSecure,
+			path: '/',
 			domain: domain
 		})
 	
