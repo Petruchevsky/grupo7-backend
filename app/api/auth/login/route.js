@@ -7,6 +7,7 @@ import { cookies } from 'next/headers';
 const prisma = new PrismaClient();
 const isSecure = process.env.NODE_ENV === 'production';
 const sameSiteConfig = process.env.NODE_ENV === 'production' ? 'lax' : 'lax'; 
+const domain = process.env.NODE_ENV === 'production' ? '.moises-web.cl' : 'localhost';
 
 export async function POST(request) {
 	const data = await request.json();
@@ -63,6 +64,7 @@ export async function POST(request) {
 			maxAge: 7*24*60*60,
 			sameSite: sameSiteConfig,
 			secure: isSecure,
+			domain: domain
 		})
 	
 		cookies().set({
@@ -73,7 +75,7 @@ export async function POST(request) {
 			sameSite: sameSiteConfig,
 			secure: isSecure,
 			path: '/',
-			domain: '.moises-web.cl', 
+			domain: domain 
 		})
 	
 		return NextResponse.json({ message: "Login exitoso, redirigiendo a inicio" }, { status: 200 });
@@ -97,7 +99,7 @@ export async function POST(request) {
 			sameSite: sameSiteConfig,
 			secure: isSecure,
 			path: '/',
-			domain: '.moises-web.cl',
+			domain: domain
 		})
 	
 		cookies().set({
@@ -108,7 +110,7 @@ export async function POST(request) {
 			sameSite: sameSiteConfig,
 			secure: isSecure,
 			path: '/',
-			domain: '.moises-web.cl',
+			domain: domain
 		})
 
 		cookies().set({
@@ -119,7 +121,7 @@ export async function POST(request) {
 			sameSite: sameSiteConfig,
 			secure: isSecure,
 			path: '/',
-			domain: '.moises-web.cl',
+			domain: domain
 		})
 	
 		return NextResponse.json({ message: "Login exitoso, bienvenido administrador, redirigiendo..." }, { status: 200 });
