@@ -72,6 +72,8 @@ export async function POST(request) {
 			maxAge: 7*24*60*60,
 			sameSite: sameSiteConfig,
 			secure: isSecure,
+			path: '/',
+			domain: '.moises-web.cl', 
 		})
 	
 		return NextResponse.json({ message: "Login exitoso, redirigiendo a inicio" }, { status: 200 });
@@ -94,6 +96,8 @@ export async function POST(request) {
 			maxAge: 7*24*60*60,
 			sameSite: sameSiteConfig,
 			secure: isSecure,
+			path: '/',
+			domain: '.moises-web.cl',
 		})
 	
 		cookies().set({
@@ -103,6 +107,8 @@ export async function POST(request) {
 			maxAge: 7*24*60*60,
 			sameSite: sameSiteConfig,
 			secure: isSecure,
+			path: '/',
+			domain: '.moises-web.cl',
 		})
 
 		cookies().set({
@@ -112,6 +118,8 @@ export async function POST(request) {
 			maxAge: 7*24*60*60,
 			sameSite: sameSiteConfig,
 			secure: isSecure,
+			path: '/',
+			domain: '.moises-web.cl',
 		})
 	
 		return NextResponse.json({ message: "Login exitoso, bienvenido administrador, redirigiendo..." }, { status: 200 });
