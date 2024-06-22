@@ -6,7 +6,7 @@ import { cookies } from 'next/headers';
 
 const prisma = new PrismaClient();
 const isSecure = process.env.NODE_ENV === 'production';
-const sameSiteConfig = process.env.NODE_ENV === 'production' ? 'none' : 'lax'; 
+const sameSiteConfig = process.env.NODE_ENV === 'production' ? 'lax' : 'lax'; 
 
 export async function POST(request) {
 	const data = await request.json();
