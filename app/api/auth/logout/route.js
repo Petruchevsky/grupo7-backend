@@ -6,30 +6,60 @@ const sameSiteConfig = process.env.NODE_ENV === 'production' ? 'lax' : 'lax';
 const domain = process.env.NODE_ENV === 'production' ? '.moises-web.cl' : 'localhost';
 
 export async function POST() {
-	cookies().delete("authCookie", {
+	// cookies().delete("authCookie", {
+	// 	httpOnly: true,
+	// 	maxAge: 0,
+	// 	sameSite: sameSiteConfig,
+	// 	secure: isSecure,
+	// 	path: '/',
+	// 	domain: domain
+	// });
+	// cookies().delete("loginCookie", {
+	// 	httpOnly: false,
+	// 	maxAge: 0,
+	// 	sameSite: sameSiteConfig,
+	// 	secure: isSecure,
+	// 	path: '/',
+	// 	domain: domain 
+	// });
+	// cookies().delete("adminCookie", {
+	// 	httpOnly: false,
+	// 	maxAge: 0,
+	// 	sameSite: sameSiteConfig,
+	// 	secure: isSecure,
+	// 	path: '/',
+	// 	domain: domain
+	// });
+
+	cookies().set({
+		name: 'authCookie',
+		value: '',
 		httpOnly: true,
 		maxAge: 0,
 		sameSite: sameSiteConfig,
 		secure: isSecure,
-		path: '/',
 		domain: domain
-	});
-	cookies().delete("loginCookie", {
+	})
+
+	cookies().set({
+		name: 'loginCookie',
+		value: '',
 		httpOnly: false,
 		maxAge: 0,
 		sameSite: sameSiteConfig,
 		secure: isSecure,
-		path: '/',
-		domain: domain 
-	});
-	cookies().delete("adminCookie", {
+		domain: domain
+	})
+
+	cookies().set({
+		name: 'adminCookie',
+		value: '',
 		httpOnly: false,
 		maxAge: 0,
 		sameSite: sameSiteConfig,
 		secure: isSecure,
-		path: '/',
 		domain: domain
-	});
+	})
 
 	return NextResponse.json(
 		{ message: "Sesión cerrada, vuelve pronto!" },
